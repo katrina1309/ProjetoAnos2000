@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portifólio Karine Oliveira</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: #f5f0ff;
+        font-family: 'Segoe UI', sans-serif;
+    }
+    
+    #cursor-glitter {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 9999;
+    }
+    
+    h1 {
+        color: #0c001d;
+    }
+    
+</style>
+</head>
+<body>
+<!-- Canvas para o efeito de glitter -->
+<canvas id="cursor-glitter"></canvas>
+
+<script>
+    const canvas = document.getElementById('cursor-glitter');
+    const ctx = canvas.getContext('2d');
+    
+    // Ajusta o tamanho do canvas para a tela inteira
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    
+    // Array para armazenar as partículas de glitter
+    const particles = [];
+    const colors = [
+        '#E0AAFF', // Lilás claro
+        '#C77DFF', // Roxo médio
+        '#9D4EDD', // Roxo mais escuro
+        '#FFFFFF'  // Branco para brilho
+    ];
+    
+    // Cria partículas de glitter
+    function createParticles(x, y) {
+        const particleCount = 5;
+        
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x,
+                y,
+                size: Math.random() * 2 + 1,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                speedX: (Math.random() - 0.5) * 2,
+                speedY: (Math.random() - 0.5) * 2,
+                life: 100,
+                opacity: Math.random() * 0.5 + 0.5
+            });
+        }
+    }
+    
+    // Anima as partículas
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Atualiza e desenha cada partícula
+        for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            
+            p.x += p.speedX;
+            p.y += p.speedY;
+            p.life--;
+            p.opacity -= 0.005;
+            
+            if (p.life > 0 && p.opacity > 0) {
+                ctx.globalAlpha = p.opacity;
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+            } else {
+                particles.splice(i, 1);
+                i--;
+            }
+        }
+        
+        requestAnimationFrame(animate);
+    }
+    
+    // Rastreia o movimento do mouse
+    document.addEventListener('mousemove', (e) => {
+        createParticles(e.clientX, e.clientY);
+    });
+    
+    // Redimensiona o canvas quando a janela é redimensionada
+    window.addEventListener('resize', resizeCanvas);
+    
+    // Inicia a animação
+    animate();
+</script>
+  <!-- Glitter Cursor Canvas -->
+  <canvas id="cursor-glitter"></canvas>
+
+  <!-- Caixa principal -->
+  <div class="glass">
+    <img width="150" style="display: block; margin-left: auto; margin-right: auto; border-radius: 90px" src="https://media.licdn.com/dms/image/v2/D4D03AQEJc-vrZOyzLg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1710519561220?e=1749081600&v=beta&t=RVsTxpX0n8tyS-Me97cv323YdFisXIKBaAEWpgxoJrM">
+
+    <h1>Karine Oliveira</h1>
+    <p>Estudande de Engenharia da Computação e desenvolvedora Full-Stack</p>
+    <div class="linguagens">
+      <div class="marquee">
+        <span> Java • Python • SQL • HTML • CSS • JavaScript • TypeScript </span>
+      </div>
+    </div>
+    <nav>
+      <a href="#sobre">Sobre</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#contato">Contato</a>
+    </nav>
+
+    <section id="sobre">
+      <h2>Sobre Mim</h2>
+      <p>Atuo como desenvolvedora Full-Stack em ComportaMente
+        e TintiTech, onde venho crescendo constantemente como profissional em TI.
+        Curso Engenharia de Computação na UTFPR, onde desde que entrei me identifiquei
+        com a área de <b>Data Base</b> e <b>Develop</b></p>
+    </section>
+
+    <section id="projetos">
+      <h2>Projetos</h2>
+      <div style="display: flex; margin-left: auto; margin-right: auto; justify-content: center; flex-wrap: wrap;">
+        <img width="400" style="margin: 20px; border-radius: 10px;" src="aaaa.png">
+        <img width="400" style="margin: 20px; border-radius: 10px;" src="https://t.ctcdn.com.br/DMxRsoFn2EzzWk6WaToT6sIidL8=/i489928.jpeg">
+        <img width="400" style="margin: 20px; border-radius: 10px;" src="https://research.aimultiple.com/wp-content/uploads/2023/03/chatgpt.webp">
+        </div>
+    </section>
+
+    <section id="contato">
+      <h2>Contato</h2>
+      <p>karine.o.prestes@gmail.com</p>
+    </section>
+    <svg style="color: #0c001d;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
+    </svg>
+  <a style="color: #0c001d;" href="https://github.com/katrina1309">
+      github
+  </a>
+    <footer>
+      <p>© 2025 Karine Oliveira</p>
+    </footer>
+  </div>
+
+  <script src="glitter.js"></script>
+</body>
+</html>
