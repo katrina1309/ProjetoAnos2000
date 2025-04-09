@@ -30,30 +30,27 @@
 </style>
 </head>
 <body>
-<!-- Canvas para o efeito de glitter -->
+  
 <canvas id="cursor-glitter"></canvas>
 
 <script>
     const canvas = document.getElementById('cursor-glitter');
     const ctx = canvas.getContext('2d');
     
-    // Ajusta o tamanho do canvas para a tela inteira
     function resizeCanvas() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     }
     resizeCanvas();
     
-    // Array para armazenar as partículas de glitter
     const particles = [];
     const colors = [
-        '#E0AAFF', // Lilás claro
-        '#C77DFF', // Roxo médio
-        '#9D4EDD', // Roxo mais escuro
-        '#FFFFFF'  // Branco para brilho
+        '#E0AAFF',
+        '#C77DFF',
+        '#9D4EDD',
+        '#FFFFFF'
     ];
     
-    // Cria partículas de glitter
     function createParticles(x, y) {
         const particleCount = 5;
         
@@ -71,11 +68,9 @@
         }
     }
     
-    // Anima as partículas
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
-        // Atualiza e desenha cada partícula
         for (let i = 0; i < particles.length; i++) {
             const p = particles[i];
             
@@ -99,21 +94,16 @@
         requestAnimationFrame(animate);
     }
     
-    // Rastreia o movimento do mouse
     document.addEventListener('mousemove', (e) => {
         createParticles(e.clientX, e.clientY);
     });
     
-    // Redimensiona o canvas quando a janela é redimensionada
     window.addEventListener('resize', resizeCanvas);
     
-    // Inicia a animação
     animate();
 </script>
-  <!-- Glitter Cursor Canvas -->
   <canvas id="cursor-glitter"></canvas>
 
-  <!-- Caixa principal -->
   <div class="glass">
     <img width="150" style="display: block; margin-left: auto; margin-right: auto; border-radius: 90px" src="https://media.licdn.com/dms/image/v2/D4D03AQEJc-vrZOyzLg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1710519561220?e=1749081600&v=beta&t=RVsTxpX0n8tyS-Me97cv323YdFisXIKBaAEWpgxoJrM">
 
